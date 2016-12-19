@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource{
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
 
     @IBOutlet var tableView: UITableView!
     var tasks: [Task] = [
@@ -30,7 +30,19 @@ class ViewController: UIViewController, UITableViewDataSource{
         let task = tasks[indexPath.row]
         cell.textLabel?.text = task.title
         cell.detailTextLabel?.text = task.memo
+        if task.done {
+         cell.accessoryType = .checkmark
+        } else {
+         cell.accessoryType = .none
+        }
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var task = tasks[indexPath.row]
+        task.done = !task.done
+        tasks[indexPath.row] = task
+        print(task.title)
+        tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.fade)
     }
     
 }

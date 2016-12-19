@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6805FD7B1E07EA1900718DBB /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6805FD7A1E07EA1900718DBB /* Task.swift */; };
+		6805FD7D1E08047200718DBB /* TaskEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6805FD7C1E08047200718DBB /* TaskEditViewController.swift */; };
 		68229BE11E0675EA00FEBA09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68229BE01E0675EA00FEBA09 /* AppDelegate.swift */; };
 		68229BE31E0675EA00FEBA09 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68229BE21E0675EA00FEBA09 /* ViewController.swift */; };
 		68229BE61E0675EA00FEBA09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68229BE41E0675EA00FEBA09 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		6805FD7A1E07EA1900718DBB /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		6805FD7C1E08047200718DBB /* TaskEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = TaskEditViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		68229BDD1E0675E900FEBA09 /* 투두박스.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "투두박스.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		68229BE01E0675EA00FEBA09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68229BE21E0675EA00FEBA09 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				68229BE71E0675EA00FEBA09 /* Assets.xcassets */,
 				68229BE91E0675EA00FEBA09 /* LaunchScreen.storyboard */,
 				68229BEC1E0675EA00FEBA09 /* Info.plist */,
+				6805FD7C1E08047200718DBB /* TaskEditViewController.swift */,
 			);
 			path = Todobox;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 				68229BE31E0675EA00FEBA09 /* ViewController.swift in Sources */,
 				6805FD7B1E07EA1900718DBB /* Task.swift in Sources */,
 				68229BE11E0675EA00FEBA09 /* AppDelegate.swift in Sources */,
+				6805FD7D1E08047200718DBB /* TaskEditViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
