@@ -22,16 +22,41 @@ class TaskEditViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func doneButtonDidTap(){
-        guard let title = titleInput.text, !title.isEmpty else { return }
+        guard let title = titleInput.text,
+            !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            self.shake(self.titleInput)
+            return
+        }
+        
+        
+    }
+    func shake(_ view: UIView){
         UIView.animate(
             withDuration: 0.05,
-            animations: {
-                self.titleInput.frame.origin.x -= 10
-        }
+            animations: { view.frame.origin.x -= 10 },
             completion: { _ in
-                
-            }
-        )
-        
+                UIView.animate(
+                    withDuration: 0.05,
+                    animations: { view.frame.origin.x += 20 },
+                    completion: { _ in
+                        UIView.animate(
+                            withDuration: 0.05,
+                            animations: { view.frame.origin.x -= 20 },
+                            completion: { _ in
+                                UIView.animate(
+                                    withDuration: 0.05,
+                                    animations: { view.frame.origin.x += 20 },
+                                    completion: { _ in
+                                        UIView.animate(
+                                            withDuration: 0.05,
+                                            animations: { view.frame.origin.x -= 10 },
+                                            completion: { _ in
+                                                view.becomeFirstResponder()
+                                        })
+                                })
+                        })
+                })
+        })
+    
     }
 }
