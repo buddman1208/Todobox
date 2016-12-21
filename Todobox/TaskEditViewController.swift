@@ -19,7 +19,13 @@ class TaskEditViewController: UIViewController {
     
     
     @IBAction func cancelButtonDidTap(){
-        self.dismiss(animated: true, completion: nil)
+        let alertController = UIAlertController(title: "ㅁㅊ", message: "님 진짜 취소함?", preferredStyle: .alert)
+        let yes = UIAlertAction(title: "ㅇㅇ", style: .destructive){ _ in
+            self.dismiss(animated: true, completion: nil)
+        }
+        alertController.addAction(yes)
+        self.present(alertController, animated: true, completion: nil)
+        
     }
     @IBAction func doneButtonDidTap(){
         guard let title = titleInput.text,
