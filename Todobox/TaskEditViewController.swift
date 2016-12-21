@@ -8,27 +8,30 @@
 
 import UIKit
 
-class TaskEditViewController: UIViewController{
+class TaskEditViewController: UIViewController {
     
     @IBOutlet
     var titleInput: UITextField!
     @IBOutlet
     var memoInput: UITextView!
     
+    var didAddTask: ((Task) -> Void)?
+    
     
     @IBAction func cancelButtonDidTap(){
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func doneButtonDidTap(){
-        guard let title = titleInput.text,
-            let navigationController = self.presentingViewController as? UINavigationController,
-            let taskListViewController = navigationController.viewControllers.first as? ViewController
-            else { return }
-        let newTask = Task(title: title)
-      taskListViewController.tasks.append(newTask)
-      taskListViewController.tableView.reloadData()
-      self.dismiss(animated: true, completion: nil)
-      
-      
+        guard let title = titleInput.text, !title.isEmpty else { return }
+        UIView.animate(
+            withDuration: 0.05,
+            animations: {
+                self.titleInput.frame.origin.x -= 10
+        }
+            completion: { _ in
+                
+            }
+        )
+        
     }
 }
