@@ -23,6 +23,8 @@ class TaskEditViewController: UIViewController {
         let yes = UIAlertAction(title: "ㅇㅇ", style: .destructive){ _ in
             self.dismiss(animated: true, completion: nil)
         }
+        let no = UIAlertAction(title: "아니", style: .default, handler : nil)
+        alertController.addAction(no)
         alertController.addAction(yes)
         self.present(alertController, animated: true, completion: nil)
         
