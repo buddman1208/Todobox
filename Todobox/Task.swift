@@ -12,7 +12,7 @@ struct Task {
     var memo: String?
     var done: Bool = false
     
-    init(title: String, memo: String? = nil){
+    init(title: String, memo: String? = nil, done: Bool = false){
         self.title = title
         self.memo = memo
         self.done = false

@@ -11,15 +11,36 @@ import UIKit
 class TaskListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
   
   @IBOutlet var tableView: UITableView!
-  var tasks: [Task] = [
-    Task(title: "원준갓", memo: "일해라"),
-    Task(title: "원준갓1", memo: "일해라4"),
-    Task(title: "원준갓2", memo: "일해라3"),
-    ]
+  var tasks: [Task] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.loadAll()
     self.tableView.backgroundColor = UIColor.green
+  }
+  
+  func saveAll(){
+    let dicts = self.tasks.map { task -> [String: Any] in
+      return [
+        "title": task.title,
+        "done": task.done
+      ]
+    }
+    UserDefaults.standard.set(dicts, forKey: "tasks")
+    UserDefaults.standard.synchronize()
+    
+  }
+  func loadAll(){
+    guard let dicts = UserDefaults.standard.array(forKey: "tasks") as? [[String:Any]]
+      else { return }
+    self.tasks = dicts.flatMap { dict -> Task? in
+      guard let title = dict["title"] as? String,
+        let done = dict["done"] as? Bool
+        else { return nil }
+      return Task(title: title, done: done)
+    }
+    
+    self.tableView.reloadData()
   }
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let navigationController = segue.destination as? UINavigationController,
@@ -28,6 +49,7 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
       
       taskEditViewController.didAddTask = { newTask in
         self.tasks.append(newTask)
+        self.saveAll()
         self.tableView.reloadData()
       }
     }

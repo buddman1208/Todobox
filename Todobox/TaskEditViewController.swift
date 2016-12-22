@@ -35,6 +35,11 @@ class TaskEditViewController: UIViewController {
             self.shake(self.titleInput)
             return
         }
+        self.titleInput.resignFirstResponder()
+        
+        let newTask = Task(title: title, memo: self.titleInput.text)
+        self.didAddTask?(newTask)
+        self.dismiss(animated: true, completion: nil)
         
         
     }
