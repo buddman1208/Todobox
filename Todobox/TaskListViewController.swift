@@ -21,6 +21,7 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
   
   var tasks: [Task] = [] {
     didSet{
+      self.editButton.isEnabled = !tasks.isEmpty
       self.saveAll()
     }
   }
@@ -30,6 +31,7 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     self.loadAll()
     self.doneButton.target = self
     self.tableView.backgroundColor = UIColor.white
+    
   }
   
   func saveAll(){
@@ -47,13 +49,13 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     guard let dicts = UserDefaults.standard.array(forKey: "tasks") as? [[String:Any]]
       else { return }
     
-//    self.tasks = dicts.flatMap { dict -> Task? in
-//      guard let title = dict["title"] as? String,
-//        let done = dict["done"] as? Bool
-//        else { return nil }
-//      return Task(title: title, done: done)
-//    }
-// simplify
+    //    self.tasks = dicts.flatMap { dict -> Task? in
+    //      guard let title = dict["title"] as? String,
+    //        let done = dict["done"] as? Bool
+    //        else { return nil }
+    //      return Task(title: title, done: done)
+    //    }
+    // simplify
     self.tasks = dicts.flatMap(Task.init)
     self.tableView.reloadData()
   }
@@ -63,7 +65,7 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     self.tableView.setEditing(true, animated: true)
   }
   
-
+  
   func doneButtonDidTap(){
     self.navigationItem.leftBarButtonItem = self.editButton
     self.tableView.setEditing(false, animated: true)
@@ -99,21 +101,26 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     var task = tasks[indexPath.row]
     task.done = !task.done
     tasks[indexPath.row] = task
-
+    
     self.saveAll()
     tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.fade)
   }
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     self.tasks.remove(at: indexPath.row)
     self.tableView.deleteRows(at: [indexPath], with: .automatic)
-    
+    if self.tasks.isEmpty {
+      self.doneButtonDidTap()
+    }
   }
+  
   func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
     return true
   }
   func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-    let task = self.tasks.remove(at: sourceIndexPath.row)
-    self.tasks.insert(task, at: destinationIndexPath.row)
+    var newTask = self.tasks
+    let task = newTask.remove(at: sourceIndexPath.row)
+    newTask.insert(task, at: destinationIndexPath.row)
+    self.tasks = newTask
   }
 }
 
