@@ -19,13 +19,17 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
     action: #selector(doneButtonDidTap)
   )
   
-  var tasks: [Task] = []
+  var tasks: [Task] = [] {
+    didSet{
+      self.saveAll()
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     self.loadAll()
     self.doneButton.target = self
-    self.tableView.backgroundColor = UIColor.green
+    self.tableView.backgroundColor = UIColor.white
   }
   
   func saveAll(){
@@ -102,6 +106,14 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     self.tasks.remove(at: indexPath.row)
     self.tableView.deleteRows(at: [indexPath], with: .automatic)
+    
+  }
+  func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    return true
+  }
+  func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    let task = self.tasks.remove(at: sourceIndexPath.row)
+    self.tasks.insert(task, at: destinationIndexPath.row)
   }
 }
 
