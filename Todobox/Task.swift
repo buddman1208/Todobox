@@ -17,4 +17,14 @@ struct Task {
         self.memo = memo
         self.done = false
     }
+    init?(dictionary: [String:Any]){
+        if let title = dictionary["title"] as? String,
+            let done = dictionary["done"] as? Bool{
+            self.title = title
+            self.done = done
+            self.memo = dictionary["memo"] as? String
+            
+        }
+        return nil
+    }
 }
