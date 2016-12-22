@@ -24,7 +24,8 @@ struct Task {
             self.done = done
             self.memo = dictionary["memo"] as? String
             
+        } else {
+            return nil
         }
-        return nil
     }
 }

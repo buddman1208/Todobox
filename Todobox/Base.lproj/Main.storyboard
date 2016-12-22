@@ -67,6 +67,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="해적왕 원준깃" id="nje-39-ZAh">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="55o-e7-Opl">
+                            <connections>
+                                <action selector="editButtonDidTap" destination="BYZ-38-t0r" id="RNS-Sd-Ryg"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Ndz-Yw-wnE">
                             <connections>
                                 <segue destination="7sj-6F-igU" kind="show" id="DaB-6Q-8Tc"/>
@@ -74,6 +79,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="55o-e7-Opl" id="JZP-P4-dUS"/>
                         <outlet property="tableView" destination="sHI-40-iNY" id="qqd-Dj-jnZ"/>
                     </connections>
                 </viewController>
